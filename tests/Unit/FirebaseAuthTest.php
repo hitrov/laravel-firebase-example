@@ -20,30 +20,30 @@ class FirebaseAuthTest extends TestCase
 
     public function testGetUserByEmail(): void
     {
-        $this->auth->expects($this->once())->method('getUserByEmail');
-
         $this->auth->method('getUserByEmail')
             ->willReturn($this->getUserRecord());
+
+        $this->auth->expects($this->once())->method('getUserByEmail');
 
         $this->auth->getUserByEmail('');
     }
 
     public function testChangeUserEmail(): void
     {
-        $this->auth->expects($this->once())->method('changeUserEmail');
-
         $this->auth->method('changeUserEmail')
             ->willReturn($this->getUserRecord());
+
+        $this->auth->expects($this->once())->method('changeUserEmail');
 
         $this->auth->changeUserEmail('', '');
     }
 
     public function testCreateUserWithEmailAndPassword(): void
     {
-        $this->auth->expects($this->once())->method('createUserWithEmailAndPassword');
-
         $this->auth->method('createUserWithEmailAndPassword')
             ->willReturn($this->getUserRecord());
+
+        $this->auth->expects($this->once())->method('createUserWithEmailAndPassword');
 
         $this->auth->createUserWithEmailAndPassword('', '');
     }
