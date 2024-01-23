@@ -11,7 +11,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(\App\Repository\Interfaces\Auth::class, \App\Repository\FirebaseAuth::class);
+        $this->app->singleton(
+            \Kreait\Firebase\Contract\Auth::class,
+            fn() => \Kreait\Laravel\Firebase\Facades\Firebase::auth(),
+        );
     }
 
     /**

@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
-use Kreait\Firebase\Auth\UserRecord;
-use Kreait\Firebase\Contract\Auth;
+use App\Repository\Interfaces\Auth;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class FirebaseAuthTest extends TestCase
 {
@@ -21,7 +20,7 @@ class FirebaseAuthTest extends TestCase
     public function testGetUserByEmail(): void
     {
         $this->auth->method('getUserByEmail')
-            ->willReturn($this->getUserRecord());
+            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('getUserByEmail');
 
@@ -31,7 +30,7 @@ class FirebaseAuthTest extends TestCase
     public function testChangeUserEmail(): void
     {
         $this->auth->method('changeUserEmail')
-            ->willReturn($this->getUserRecord());
+            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('changeUserEmail');
 
@@ -41,20 +40,10 @@ class FirebaseAuthTest extends TestCase
     public function testCreateUserWithEmailAndPassword(): void
     {
         $this->auth->method('createUserWithEmailAndPassword')
-            ->willReturn($this->getUserRecord());
+            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('createUserWithEmailAndPassword');
 
         $this->auth->createUserWithEmailAndPassword('', '');
-    }
-
-    private function getUserRecord(): UserRecord
-    {
-        return UserRecord::fromResponseData([
-            'localId' => 'foo',
-            'rawId' => 'bar',
-            'providerId' => 'baz',
-            'createdAt' => (string) now(),
-        ]);
     }
 }
