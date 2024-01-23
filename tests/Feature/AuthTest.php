@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Repository\Interfaces\Auth;
 use PHPUnit\Framework\MockObject\MockObject;
+use Tests\Mocks\Auth;
 use Tests\TestCase;
 
-class FirebaseAuthTest extends TestCase
+class AuthTest extends TestCase
 {
     private Auth|MockObject $auth;
 
@@ -20,7 +20,7 @@ class FirebaseAuthTest extends TestCase
     public function testGetUserByEmail(): void
     {
         $this->auth->method('getUserByEmail')
-            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
+            ->willReturn(Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('getUserByEmail');
 
@@ -30,7 +30,7 @@ class FirebaseAuthTest extends TestCase
     public function testChangeUserEmail(): void
     {
         $this->auth->method('changeUserEmail')
-            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
+            ->willReturn(Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('changeUserEmail');
 
@@ -40,7 +40,7 @@ class FirebaseAuthTest extends TestCase
     public function testCreateUserWithEmailAndPassword(): void
     {
         $this->auth->method('createUserWithEmailAndPassword')
-            ->willReturn(\Tests\Mocks\Auth::getUserRecord());
+            ->willReturn(Auth::getUserRecord());
 
         $this->auth->expects($this->once())->method('createUserWithEmailAndPassword');
 
