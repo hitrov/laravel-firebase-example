@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use Kreait\Firebase\Contract\Auth;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\Mocks\Auth;
+use Tests\Mocks\AuthHelper;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -19,30 +20,26 @@ class AuthTest extends TestCase
 
     public function testGetUserByEmail(): void
     {
-        $this->auth->method('getUserByEmail')
-            ->willReturn(Auth::getUserRecord());
-
-        $this->auth->expects($this->once())->method('getUserByEmail');
+        $this->auth->expects($this->once())->method('getUserByEmail')
+            ->willReturn(AuthHelper::getUserRecord());
 
         $this->auth->getUserByEmail('');
     }
 
     public function testChangeUserEmail(): void
     {
-        $this->auth->method('changeUserEmail')
-            ->willReturn(Auth::getUserRecord());
-
-        $this->auth->expects($this->once())->method('changeUserEmail');
+        $this->auth->expects($this->once())
+            ->method('changeUserEmail')
+            ->willReturn(AuthHelper::getUserRecord());
 
         $this->auth->changeUserEmail('', '');
     }
 
     public function testCreateUserWithEmailAndPassword(): void
     {
-        $this->auth->method('createUserWithEmailAndPassword')
-            ->willReturn(Auth::getUserRecord());
-
-        $this->auth->expects($this->once())->method('createUserWithEmailAndPassword');
+        $this->auth->expects($this->once())
+            ->method('createUserWithEmailAndPassword')
+            ->willReturn(AuthHelper::getUserRecord());
 
         $this->auth->createUserWithEmailAndPassword('', '');
     }

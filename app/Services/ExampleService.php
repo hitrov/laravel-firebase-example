@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use App\Repository\Interfaces\Auth;
+use Kreait\Firebase\Auth\UserRecord;
+use Kreait\Firebase\Contract\Auth;
 
 class ExampleService
 {
@@ -10,8 +11,8 @@ class ExampleService
     {
     }
 
-    public function execute(): void
+    public function execute(string $input): UserRecord
     {
-        $this->auth->getUserByEmail('user@example.com');
+        return $this->auth->getUserByEmail($input);
     }
 }
